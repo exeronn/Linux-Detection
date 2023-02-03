@@ -1,0 +1,31 @@
+title: suspicious account creation
+id: d98a132c-1eb8-4b1e-ae3c-b42503084567
+status: experimental
+description: Identifies instances where account are created by echoing the details for an account into either passwd or chpasswd
+references:
+    - echo "root:SIPXarJsYOlF"|chpasswd|bash
+    - echo -e "12345\n3R7ZTfGoRsCl\n3R7ZTfGoRsCl"|passwd|bash
+tags:
+    - attack.persistence
+    - attack.T1136.001
+author: exeron
+date: 2023/02/03
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    echo:
+        CommandLine|contains: 'echo -e "'
+        - 'echo "'
+    credentialsplit:
+        CommandLine|contains: ':'
+        - '\n'
+    end:
+        CommandLine|contains: '"|chpasswd|bash'
+        - '"|passwd|bash'
+    condition: 1 of echo and 1 of credentialsplit and 1 of end
+fields:
+    - process commandline
+falsepositives:
+    - Where an administrator or program adds a user by this method, to investigate confirm the process heigherarchy & if it's done over SSH then verify the login source of the connection used to execute the command.
+level: medium
