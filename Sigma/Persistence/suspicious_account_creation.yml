@@ -21,8 +21,9 @@ detection:
         CommandLine|contains: ':'
         - '\n'
     end:
-        CommandLine|contains: '"|chpasswd|bash'
+        CommandLine|endswith: '"|chpasswd|bash'
         - '"|passwd|bash'
+        - '"|passwd'
     condition: 1 of echo and 1 of credentialsplit and 1 of end
 fields:
     - process commandline
