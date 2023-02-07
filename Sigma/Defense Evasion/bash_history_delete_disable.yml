@@ -1,0 +1,29 @@
+title: bash History Delete and Disable
+id: f840ea5e-a889-403c-a358-814e0f74ca27
+status: experimental
+description: Identifies events where the bash history is either wiped or disabled through various methods
+references:
+    - unset HISTORY HISTFILE HISTSAVE HISTZONE HISTORY HISTLOG WATCH ; history -n ; export HISTFILE=/dev/null ; export HISTSIZE=0; export HISTFILESIZE=0;
+tags:
+    - attack.defense_evasion
+    - attack.t1070.003
+author: exeron
+date: 2023/02/07 
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    variableset:
+        CommandLine|contains: 
+        - 'HISTFILE=/dev/null'
+        - 'HISTSIZE=0'
+        - 'HISTFILESIZE=0'
+    export:
+        CommandLine|contains: 
+        - 'export'
+    condition: 1 of variableset and 1 of export
+fields:
+    - process commandline
+falsepositives:
+    - The FP rate should be low, disabling the bash history in this way is unlikely, however this cannot be confirmed at scale.
+level: medium
