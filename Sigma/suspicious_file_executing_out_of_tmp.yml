@@ -1,0 +1,24 @@
+title: suspicious File Executing Out of tmp
+id: 245dcb15-3e49-488d-9436-316c92ebfda2
+status: experimental
+description: Looking for elf files being executed out of a */tmp/* directory.
+references:
+    - examples: /tmp/.droid/droid/ & /var/tmp/sshd
+tags:
+    - attack.execution
+author: exeron
+date: 2023/02/13
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    tmp:
+        Image|contains: 
+        - '/tmp/'
+    condition: 1 of tmp
+fields:
+    - process commandline
+    - process image
+falsepositives:
+    - Likely interesting due to apt-get not using */tmp/* in testing. Possible FP's from installers and build script. Also possible FP's from repositories that have /tmp/ within as a tegitimate directory.
+level: medium
