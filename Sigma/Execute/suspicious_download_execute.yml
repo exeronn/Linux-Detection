@@ -18,12 +18,13 @@ detection:
     download:
         CommandLine|contains: 
         - 'wget'
+        CommandLine|contains:
         - 'curl'
     permissions:
         CommandLine|contains: 
         - 'chmod 777'
         - 'chmod +x'
-    condition: all of download and 1 of permissions*
+    condition: all of download and 1 of permissions
 fields:
     - process commandline
 falsepositives:
