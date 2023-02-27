@@ -1,0 +1,30 @@
+title: log deletion via rm
+id: 4c363f83-f2b0-4007-9643-a524e74c82f4
+status: experimental
+description: Identifies events where the logs are deleted using rm -rf /var/log/* - https://uncoder.io/ to convert easily
+references:
+    - rm -rf /var/run/utmp /var/log/wtmp /var/log/lastlog /var/log/messages /var/log/secure /var/log/xferlog /var/log/maillog
+tags:
+    - attack.defense_evasion
+    - attack.t1070.002
+author: exeron
+date: 2023/02/27
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    rf:
+        CommandLine|contains: 
+        - '-rf'
+    logs:
+        CommandLine|contains: 
+        - '/var/log/'
+    rm:
+        Image|endswith:
+        - 'rm'        
+    condition: 1 of rm and 1 of rf and 1 of logs
+fields:
+    - process commandline
+falsepositives:
+    - Unknown, likely system admins, the use of -rf may be less common amongst admins.
+level: low
