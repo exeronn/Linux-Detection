@@ -1,0 +1,23 @@
+<Sysmon schemaversion="4.81">
+        <EventFiltering>
+			<RuleGroup name="pyInsatller_fileCreate_baseLibrary" groupRelation="and">
+                <FileCreate onmatch="include">
+					<TargetFilename condition="end with">base_library.zip</TargetFilename>
+				</FileCreate>
+			</RuleGroup>
+			
+			<RuleGroup name="pyInsatller_fileCreate_tmpName" groupRelation="and">
+                <FileCreate onmatch="include">
+					<TargetFilename condition="contains">/tmp/</TargetFilename>
+					<TargetFilename condition="contains">/_MEI</TargetFilename>
+				</FileCreate>
+			</RuleGroup>
+			
+			<RuleGroup name="pyInsatller_fileCreate_cpythonTemp" groupRelation="and">
+                <FileCreate onmatch="include">
+					<TargetFilename condition="contains">/tmp/</TargetFilename>
+					<TargetFilename condition="contains">cpython</TargetFilename>
+				</FileCreate>
+			</RuleGroup>
+        </EventFiltering>
+</Sysmon>
