@@ -1,0 +1,37 @@
+title: pyInstaller Execution
+id: 1a4b25ed-54f4-4ad0-ba6c-03bb1a7a1f10
+status: experimental
+description: Looking for files written as part of execution related to a pyinstaller compiled ELF binary - https://uncoder.io/ to convert easily
+            - Sysmon config to record the relevant file events - https://github.com/exeronn/Linux-Detection/blob/main/Sysmon/Execution/T1059-006_sysmon_pyInstaller.xml
+references:
+    - https://twitter.com/exeron/status/1630622283885690896
+tags:
+    - attack.execution
+    - attack.t1059.006
+author: exeron
+date: 2023/02/28 
+logsource:                      
+    category: file_event  
+    product: linux            
+detection:
+    baselib:
+        TargetFilename|endswith: 
+        - 'base_library.zip'
+    tmpName_1:
+        TargetFilename|contains: 
+        - '/tmp/'
+    tmpName_2:
+        TargetFilename|contains: 
+        - '/_MEI'
+    cpython_1:
+        TargetFilename|contains: 
+        - '/tmp/'
+    cpython_2:
+        TargetFilename|contains: 
+        - 'cpython'
+    condition: 1 of baselib or (1 of tmpName_1 and 1 of tmpName_2) or (1 of cpython_1 and 1 of cpython_2)
+fields:
+    - TargetFilenamee
+falsepositives:
+    - Any legitimate pyInstaller package usage. Any incorrect file hits also, look for multiple cpython files in the same dirctory or child folders. 
+level: low
