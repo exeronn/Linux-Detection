@@ -1,0 +1,30 @@
+title: suspicious python script Executing Out of tmp
+id: fa0a19cc-fd4b-4051-b2b9-f2b0a7901083
+status: experimental
+description: Looking for python scripts being executed out of a */tmp/* directory. The CurrentDirectory field may break certain translations, it's a field in Sysmon
+references:
+    - Extrapolated from perl /tmp/niko1
+tags:
+    - attack.execution
+author: exeron
+date: 2023/03/02
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    python:
+        Image|contains: 
+        - '/python'
+    temp1:
+        CommandLine|contains:
+        - '/tmp/'
+    temp2:
+        CurrentDirectory|contains:
+        - 'tmp'
+    condition: (1 of temp1 or 1 of temp2) and 1 of python
+fields:
+    - CommandLine
+    - CurrentDirectory
+falsepositives:
+    - Any legitimate python scripts executing from /tmp/. Most scripts should likely run from a more persistent area.
+level: medium

@@ -1,0 +1,29 @@
+title: suspicious Perl script Executing a shell
+id: 4073a098-8c1b-412e-86a2-9fe344d469bf
+status: experimental
+description: Looking for perl scripts that are executing a shell
+references:
+    - /bin/sh -i
+tags:
+    - attack.execution
+    - attach.t1059.004
+author: exeron
+date: 2023/03/02
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    shell:
+        Image|endswith: 
+        - '/sh'
+        - '/bash'
+    parent:
+        ParentImage|contains:
+        - 'perl'
+    condition: 1 of shell and 1 of parent
+fields:
+    - Image
+    - ParentImage
+falsepositives:
+    - Any legitimate perl scripts executing shells.
+level: low

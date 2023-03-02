@@ -1,0 +1,30 @@
+title: suspicious Perl script Executing Out of tmp
+id: b1008435-4703-4fa3-b30f-6828fe38bb95
+status: experimental
+description: Looking for perl scripts being executed out of a */tmp/* directory. The CurrentDirectory field may break certain translations, it's a field in Sysmon
+references:
+    - examples perl /tmp/niko1
+tags:
+    - attack.execution
+author: exeron
+date: 2023/03/02
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    perl:
+        Image|endswith: 
+        - '/perl'
+    temp1:
+        CommandLine|contains:
+        - '/tmp/'
+    temp2:
+        CurrentDirectory|contains:
+        - 'tmp'
+    condition: (1 of temp1 or 1 of temp2) and 1 of perl
+fields:
+    - CommandLine
+    - CurrentDirectory
+falsepositives:
+    - Any legitimate perl scripts executing from /tmp/. Most scripts should likely run from a more persistent area.
+level: medium

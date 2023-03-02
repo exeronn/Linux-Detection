@@ -1,0 +1,29 @@
+title: suspicious Perl script Executing pwd
+id: 3697ff45-66b1-4bd1-8e25-5f5273ab0b12
+status: experimental
+description: Looking for perl scripts that are executing pwd. This is typical adversary behaviour to work out what folder they're in.
+references:
+    - !u  Dir where you are : pwd
+tags:
+    - attack.discovery
+    - attack.t1083
+author: exeron
+date: 2023/03/02
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    pwd:
+        CommandLine|contains: 
+        - ' pwd'
+        - 'pwd '
+    parent:
+        ParentImage|endswith:
+        - 'perl'
+    condition: 1 of perl and 1 of pwd
+fields:
+    - CommandLine
+    - ParentImage
+falsepositives:
+    - Any legitimate perl scripts using pwd to locate their current location.
+level: low

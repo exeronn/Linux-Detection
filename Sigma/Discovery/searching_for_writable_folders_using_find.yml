@@ -1,0 +1,46 @@
+title: searching for writable folders using find
+id: 44138ee1-0bb5-4b1c-84a9-10faf7cf5f47
+status: experimental
+description: Looking for instances where a command has been run to search for writable folders using find.
+references:
+    - find / -perm -2 -ls
+    - https://www.thegeekdiary.com/linux-unix-examples-of-find-command-to-find-files-with-specific-sets-of-permissions/
+tags:
+    - attack.discovery
+    - attack.t1083
+author: exeron
+date: 2023/03/02
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    find:
+        Image|endswith: 
+        - 'find'
+    perm:
+        CommandLine|contains:
+        - '-perm'
+    two:
+        CommandLine|contains:
+        - '-2'
+        - '/2'
+        - '-02'
+        - '/02'
+        - '-002'
+        - '/002'
+        - '-12'
+        - '-22'
+        - '-42'
+        - '-102'
+        - '-202'
+        - '-402'
+        - '-1002'
+        - '-2002'
+        - '-4002'
+    condition: 1 of find and 1 of perm and 1 of two
+fields:
+    - Image
+    - CommandLine
+falsepositives:
+    - Any legitimate usage looking for writable directories
+level: medium

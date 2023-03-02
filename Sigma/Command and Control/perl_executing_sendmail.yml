@@ -1,0 +1,28 @@
+title: suspicious Perl executing sendmail
+id: 4046970e-5cf1-43b4-a6c1-99e3bc1305f9
+status: experimental
+description: Looking for perl scripts executing sendmail
+references:
+    - /usr/sbin/sendmail -t
+tags:
+    - attack.execution
+    - attack.t1071.003
+author: exeron
+date: 2023/03/02
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    sendmail:
+        Image|endswith: 
+        - 'sendmail'
+    parent:
+        ParentImage|endswith:
+        - 'perl'
+    condition: 1 of sendmail and 1 of parent
+fields:
+    - Image
+    - ParentImage
+falsepositives:
+    - Any legitimate perl scripts that are using sendmail directly
+level: medium

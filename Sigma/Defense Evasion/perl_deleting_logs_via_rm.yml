@@ -1,0 +1,48 @@
+title: suspicious Perl deleting logs via rm
+id: adab9931-d4e2-40bc-9578-3fc034406ba8
+status: experimental
+description: Looking for perl scripts deleting log files to clean up activity
+references:
+    - rm -rf /var/log/lastlog
+    - rm -rf /var/log/wtmp
+    - rm -rf /etc/wtmp
+    - rm -rf /var/run/utmp
+    - rm -rf /etc/utmp
+    - rm -rf /var/log
+    - rm -rf /var/logs
+    - rm -rf /var/adm
+    - rm -rf /var/apache/log
+    - rm -rf /var/apache/logs
+    - rm -rf /usr/local/apache/log
+    - rm -rf /usr/local/apache/logs
+    - rm -rf /unix/.bash_history
+    - rm -rf /unix/.ksh_history
+tags:
+    - attack.defense_evasion
+    - attack.t1070.004
+author: exeron
+date: 2023/03/02
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    rm:
+        Image|endswith: 
+        - 'rm'
+    rf:
+        CommandLine|contains:
+        - '-rf'
+    log:
+        CommandLine|contains:
+        - 'log'
+    parent:
+        ParentImage|endswith:
+        - 'perl'
+    condition: 1 of parent and 1 of rm and 1 of rf and 1 of log
+fields:
+    - Image
+    - ParentImage
+    - CommandLine
+falsepositives:
+    - Any legitimate perl scripts that are deleting logs
+level: medium
