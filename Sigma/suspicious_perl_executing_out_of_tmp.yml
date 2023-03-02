@@ -1,7 +1,7 @@
 title: suspicious Perl script Executing Out of tmp
 id: b1008435-4703-4fa3-b30f-6828fe38bb95
 status: experimental
-description: Looking for perl scripts being executed out of a */tmp/* directory. The CurrentDirectory field may break certain translations, it's a field in Sysmon
+description: Looking for perl scripts being executed out of a */tmp/* directory. The CurrentDirectory field may break certain translations, it's a field in Sysmon - https://uncoder.io/ to convert easily
 references:
     - examples perl /tmp/niko1
 tags:

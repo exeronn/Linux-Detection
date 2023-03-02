@@ -1,7 +1,7 @@
 title: suspicious Perl script Executing pwd
 id: 3697ff45-66b1-4bd1-8e25-5f5273ab0b12
 status: experimental
-description: Looking for perl scripts that are executing pwd. This is typical adversary behaviour to work out what folder they're in.
+description: Looking for perl scripts that are executing pwd. This is typical adversary behaviour to work out what folder they're in. - https://uncoder.io/ to convert easily
 references:
     - !u  Dir where you are : pwd
 tags:

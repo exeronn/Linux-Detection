@@ -1,7 +1,7 @@
 title: suspicious Perl deleting logs via rm
 id: adab9931-d4e2-40bc-9578-3fc034406ba8
 status: experimental
-description: Looking for perl scripts deleting log files to clean up activity
+description: Looking for perl scripts deleting log files to clean up activity - https://uncoder.io/ to convert easily
 references:
     - rm -rf /var/log/lastlog
     - rm -rf /var/log/wtmp

@@ -1,7 +1,7 @@
 title: searching for writable folders using find
 id: 44138ee1-0bb5-4b1c-84a9-10faf7cf5f47
 status: experimental
-description: Looking for instances where a command has been run to search for writable folders using find.
+description: Looking for instances where a command has been run to search for writable folders using find. - https://uncoder.io/ to convert easily
 references:
     - find / -perm -2 -ls
     - https://www.thegeekdiary.com/linux-unix-examples-of-find-command-to-find-files-with-specific-sets-of-permissions/
