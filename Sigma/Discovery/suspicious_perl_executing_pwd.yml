@@ -25,5 +25,5 @@ fields:
     - CommandLine
     - ParentImage
 falsepositives:
-    - Any legitimate perl scripts using pwd to locate their current location.
+    - Any legitimate perl scripts using pwd to locate their current location. CPAN is also a user of pwd when installing modules. This rule may be better as a weak indicator than a direct alert.
 level: low
