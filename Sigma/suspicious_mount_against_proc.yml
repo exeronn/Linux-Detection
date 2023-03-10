@@ -1,0 +1,25 @@
+title: suspicious use of mount against proc
+id: 6a742678-1e86-44ed-a506-d34bb16b7823
+status: experimental
+description: Looking for the use of the mount command against /proc/ - https://uncoder.io/ to convert easily
+references:
+    - mount -o bind /tmp/ /proc/4138
+author: exeron
+date: 2023/03/10
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    mount:
+        Image|endswith: 
+        - 'mount'
+    proc:
+        CommandLine|contains:
+        - '/proc/'
+    condition: 1 of mount and 1 of proc
+fields:
+    - CommandLine
+    - Image
+falsepositives:
+    - Unknown
+level: low
