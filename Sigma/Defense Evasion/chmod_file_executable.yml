@@ -1,0 +1,30 @@
+title: suspicious chmod - set file as executable
+id: f13a09e9-cbad-4f9c-bc1e-3a75b39e0eeb
+status: experimental
+description: Looking for instances of chmod being used to mark a file as executable. A mask of 755 or similar variation could be used, I'll add it once I see it in the wild. Not including it should reduce FP's slightly. - https://uncoder.io/ to convert easily
+references:
+    - https://twitter.com/exeron/status/1636404766367531009
+tags:
+    - attack.defense_evasion
+    - attack.t1222.002
+author: exeron
+date: 2023/03/14
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    chmod:
+        Image|endswith: 
+        - 'chmod'
+    executable:
+        CommandLine|contains:
+        - '+x'
+        - '777 '
+        - ' 777'
+    condition: 1 of chmod and 1 of executable
+fields:
+    - Image
+    - CommandLine
+falsepositives:
+    - Admins changing file permissions
+level: low
