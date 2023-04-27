@@ -1,0 +1,86 @@
+              a0, a1, a2, a3
+                          Respectively,  the  first  4 arguments to a syscall. Note that string arguments are not supported. This is because the kernel is passed a pointer to the string. Triggering on a pointer address value is not
+                          likely to work. So, when using this, you should only use on numeric values. This is most likely to be used on platforms that multiplex socket or IPC operations.
+
+              arch        The CPU architecture of the syscall. The arch can be found doing 'uname -m'. If you do not know the arch of your machine but you want to use the 32 bit syscall table and your machine supports 32  bit,  you
+                          can  also  use b32 for the arch. The same applies to the 64 bit syscall table, you can use b64.  In this way, you can write rules that are somewhat arch independent because the family type will be auto de‐
+                          tected. However, syscalls can be arch specific and what is available on x86_64, may not be available on ppc. The arch directive should precede the -S option so that auditctl knows which internal  table  to
+                          use to look up the syscall numbers.
+
+              auid        The original ID the user logged in with. Its an abbreviation of audit uid. Sometimes its referred to as loginuid. Either the user account text or number may be used.
+
+              devmajor    Device Major Number
+
+              devminor    Device Minor Number
+
+              dir         Full Path of Directory to watch. This will place a recursive watch on the directory and its whole subtree. It can only be used on exit list. See "-w".
+
+              egid        Effective Group ID. May be numeric or the groups name.
+
+              euid        Effective User ID. May be numeric or the user account name.
+
+              exe         Absolute path to application that while executing this rule will apply to. It supports = and != operators. Note that you can only use this once for each rule.
+
+              exit        Exit value from a syscall. If the exit code is an errno, you may use the text representation, too.
+
+              fsgid       Filesystem Group ID. May be numeric or the groups name.
+
+              fsuid       Filesystem User ID. May be numeric or the user account name.
+
+              filetype    The target file's type. Can be either file, dir, socket, link, character, block, or fifo.
+
+              gid         Group ID. May be numeric or the groups name.
+
+              inode       Inode Number
+
+              key         This is another way of setting a filter key. See discussion above for -k option.
+
+              msgtype     This is used to match the event's record type. It should only be used on the exclude or user filter lists.
+
+              obj_uid     Object's UID
+
+              obj_gid     Object's GID
+
+              obj_user    Resource's SE Linux User
+
+              obj_role    Resource's SE Linux Role
+
+              obj_type    Resource's SE Linux Type
+
+              obj_lev_low Resource's SE Linux Low Level
+
+              obj_lev_high
+                          Resource's SE Linux High Level
+
+              path        Full Path of File to watch. It can only be used on exit list.
+
+              perm        Permission  filter  for file operations. See "-p". It can only be used on exit list. You can use this without specifying a syscall and the kernel will select the syscalls that satisfy the permissions being
+                          requested.
+
+              pers        OS Personality Number
+
+              pid         Process ID
+
+              ppid        Parent's Process ID
+
+              saddr_fam   Address family number as found in /usr/include/bits/socket.h. For example, IPv4 would be 2 and IPv6 would be 10.
+
+              sessionid   User's login session ID
+
+              subj_user   Program's SE Linux User
+
+              subj_role   Program's SE Linux Role
+
+              subj_type   Program's SE Linux Type
+
+              subj_sen    Program's SE Linux Sensitivity
+
+              subj_clr    Program's SE Linux Clearance
+
+              sgid        Saved Group ID. See getresgid(2) man page.
+
+              success     If the exit value is >= 0 this is true/yes otherwise its false/no. When writing a rule, use a 1 for true/yes and a 0 for false/no
+
+              suid        Saved User ID. See getresuid(2) man page.
+
+              uid         User ID. May be numeric or the user account name.
