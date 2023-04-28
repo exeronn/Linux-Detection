@@ -1,0 +1,30 @@
+title: echo base64 decoded content into a file
+id: f78f5180-573f-4b83-8abd-cea43e1cf8e2
+status: experimental
+description: Identifies events where a string on the commandline has been base64 decoded via echo
+references:
+    - sleep 15s && cd /var/tmp; echo "IyEvYmluL2Jhc2gKY2QgL3RtcAkKcm.....hbGwgMj4xJgpleGl0IDA=" | base64 --decode | bash
+tags:
+    - attack.defense_evasion
+    - attack.t1027
+author: exeron
+date: 2023/03/30
+logsource:                      
+    category: process_creation  
+    product: linux            
+detection:
+    echo:
+        CommandLine|contains: 
+        - 'echo'
+    base64:
+        CommandLine|contains: 
+        - 'base64'
+    decode:
+        CommandLine|contains:
+        - '--decode'        
+    condition: 1 of echo and 1 of base64 and 1 of decode
+fields:
+    - process commandline
+falsepositives:
+    - Unknown, if it's like the Windows equivilent, some admin tools may use this method to run commands.
+level: low
