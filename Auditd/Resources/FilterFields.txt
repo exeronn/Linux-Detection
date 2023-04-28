@@ -1,4 +1,14 @@
-              a0, a1, a2, a3
+              -F [n=v | n!=v | n<v | n>v | n<=v | n>=v | n&v | n&=v]
+              Build  a rule field: name, operation, value. You may have up to 64 fields passed on
+              a single command line. Each one must start with -F. Each field  equation  is  anded
+              with each other (as well as equations starting with -C) to trigger an audit record.
+              There are 8 operators supported - equal, not equal, less than, greater  than,  less
+              than  or equal, and greater than or equal, bit mask, and bit test respectively. Bit
+              test will "and" the values and check that they are equal, bit mask just "ands"  the
+              values.  Fields  that  take a user ID may instead have the user's name; the program
+              will convert the name to user ID. The same is true of  group  names.  Valid  fields
+              are:
+			  a0, a1, a2, a3
                           Respectively,  the  first  4 arguments to a syscall. Note that string arguments are not supported. This is because the kernel is passed a pointer to the string. Triggering on a pointer address value is not
                           likely to work. So, when using this, you should only use on numeric values. This is most likely to be used on platforms that multiplex socket or IPC operations.
 
