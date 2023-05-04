@@ -1,0 +1,47 @@
+Telemetry Feature Category,Sub-Category,Sysmon
+Process Activity,Process Creation,Yes
+****,Process Termination,Yes
+****,Process Access,Partial
+****,Shared Object/Library Loaded,No
+****,Remote Thread Creation,No
+****,Process Tampering Activity,No
+File Manipulation,File Creation,Yes
+****,File Opened,Partial
+****,File Deletion,Yes
+****,File Modification,No
+****,File Renaming,No
+User Account Activity,Local Account Creation,No
+****,Local Account Modification,No
+****,Local Account Deletion,No
+****,Account Login,No
+****,Account Logoff,No
+****,SSH Key Modification,No
+Network Activity,TCP Connection,Yes
+****,UDP Connection,Yes
+****,URL,No
+****,DNS Query,No
+****,File Downloaded,No
+Hash Algorithms,MD5,No
+****,SHA,No
+****,IMPHASH,No
+Scheduled Tasks (cron/at/systemd),Task Creation,No
+****,Task Modification,No
+****,Task Deletion,No
+Service Activity,Service Creation,No
+****,Service Modification,No
+****,Service Deletion,No
+Driver/Module Activity,Driver Loaded,No
+****,Driver Modification,No
+****,Driver Unloaded,No
+Device Operations,Virtual Disk Mount,No
+****,USB Device Unmount,No
+****,USB Device Mount,No
+Named Pipe Activity,Pipe Creation,No
+****,Pipe Connection,No
+EDR SysOps,Agent Start,Yes
+****,Agent Stop,Yes
+****,Agent Install,Yes
+****,Agent Uninstall,No
+****,Agent Tampering,Partial
+****,Agent Keep-Alive,No
+****,Agent Errors,No
